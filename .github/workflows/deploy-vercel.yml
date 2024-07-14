@@ -14,11 +14,6 @@ jobs:
       - name: Install Vercel CLI
         run: npm install -g vercel
 
-      - name: Deploy Supabase
-        run: |
-          cp apps/supabase/.env.production apps/supabase/.env
-          vercel --token ${{ secrets.VERCEL_TOKEN }} --cwd apps/supabase --prod
-
       - name: Deploy API
         run: |
           cp apps/api/.env.production apps/api/.env
