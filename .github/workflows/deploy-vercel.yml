@@ -1,0 +1,30 @@
+name: Deploy to Vercel
+
+on:
+  workflow_dispatch: # This triggers the workflow manually
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel
+
+      - name: Deploy Supabase
+        run: |
+          cp apps/supabase/.env.production apps/supabase/.env
+          vercel --token ${{ secrets.VERCEL_TOKEN }} --cwd apps/supabase --prod
+
+      - name: Deploy API
+        run: |
+          cp apps/api/.env.production apps/api/.env
+          vercel --token ${{ secrets.VERCEL_TOKEN }} --cwd apps/api --prod
+
+      - name: Deploy Web
+        run: |
+          cp apps/web/.env.production apps/web/.env
+          vercel --token ${{ secrets.VERCEL_TOKEN }} --cwd apps/web --prod

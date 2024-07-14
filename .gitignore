@@ -1,0 +1,26 @@
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+
+# Turbo
+.turbo
+
+# Vercel
+.vercel
+
+# Build Outputs
+dist
+
+# Debug
+pnpm-debug.log*
+
+# Misc
+.DS_Store
+*.pem
+
+# Docker
+volumes/db/data
+volumes/storage
+test.http
+docker-compose.override.yml

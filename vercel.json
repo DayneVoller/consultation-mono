@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "apps/supabase/docker-compose.yml", "use": "@vercel/docker" },
+    { "src": "apps/api/index.js", "use": "@vercel/node" },
+    {
+      "src": "apps/web",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist" }
+    }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "apps/api/$1" },
+    { "src": "/supabase/(.*)", "dest": "apps/supabase/$1" },
+    {
+      "src": "/(.*)",
+      "dest": "apps/web/$1",
+      "headers": { "Cache-Control": "s-maxage=1,stale-while-revalidate" }
+    }
+  ]
+}
